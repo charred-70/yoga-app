@@ -1,19 +1,16 @@
-import React from 'react';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "../../components/app-sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
 
-export default function routineLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider>
-            <AppSidebar />
-            <main>
-                <SidebarTrigger />
-                {children}
-            </main>
+            <div className="flex min-h-screen w-full"> {/* Add w-full here */}
+                <AppSidebar />
+                <main className="flex-1 w-full"> {/* Add flex-1 and w-full */}
+                    <SidebarTrigger />
+                    {children}
+                </main>
+            </div>
         </SidebarProvider>
-    );
+    )
 }

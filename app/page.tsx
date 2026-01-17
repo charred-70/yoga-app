@@ -26,7 +26,7 @@ export default function Home() {
         <div className="text-sky-500">image stuff</div>
       </div>
       <div className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-200">button stuff</div>
-      <section>footer</section>
+      <section className="">footer</section>
     </div>
   );
 }

@@ -1,4 +1,6 @@
 import React from 'react';
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "../../components/app-sidebar"
 
 export default function routineLayout({
     children,
@@ -6,9 +8,12 @@ export default function routineLayout({
     children: React.ReactNode;
 }) {
     return (
-        <section>
-
-            {children}
-        </section>
+        <SidebarProvider>
+            <AppSidebar />
+            <main>
+                <SidebarTrigger />
+                {children}
+            </main>
+        </SidebarProvider>
     );
 }

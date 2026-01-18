@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import shrimpy_happy from "../../public/shrimpHappy.png";
 import shrimpy_sad from "../../public/shrimpSad.png";
@@ -15,6 +15,7 @@ export default function ScoringPage() {
   // function to repeatedly fetch accuracy score
   // and updates the shrimpy image
   async function get_accuracy() {
+    console.log("get accuracy called");
     try {
       const res = await fetch(`http://127.0.0.1:8000/api/accuracy-score`, {
         method: "GET",
@@ -53,18 +54,10 @@ export default function ScoringPage() {
 
   // starts the interval that constantly calls get_accuracy
   // every 2 secs
-  intervalId = setInterval(get_accuracy, 1000);
-  console.log("starting interval rn");
-
-  // turns the function that constantly fetches
-  // the accuracy score off
-  function toggleIntervalOff() {
-    if (intervalId) {
-      console.log("trying to end interval");
-      clearInterval(intervalId);
-      intervalId = null;
-    }
-  }
+  useEffect(() => {
+    const intervalId = setInterval(get_accuracy, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   async function stop() {
     await fetch(`http://127.0.0.1:8000/api/stop-stream`, { method: "POST" });
@@ -79,7 +72,6 @@ export default function ScoringPage() {
                   fixed top-4 left-4"
           onClick={() => {
             stop();
-            toggleIntervalOff();
           }}
         >
           Back

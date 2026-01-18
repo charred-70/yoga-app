@@ -35,12 +35,16 @@ export default function ScoringPage() {
   }
 
   async function get_advice() {
-    const r = await fetch("http://127.0.0.1:8000/api/advice", {
-      method: "GET",
-    });
-    const adviceData = await r.json();
-    console.log("Advice: ", adviceData.advice);
-    speakAdvice(adviceData.advice);
+    try {
+      const r = await fetch("http://127.0.0.1:8000/api/advice", {
+        method: "GET",
+      });
+      const adviceData = await r.json();
+      console.log(adviceData);
+      speakAdvice(adviceData.advice);
+    } catch (err) {
+      console.error(err);
+    }
   }
   async function speakAdvice(advice: string) {
     if (typeof window !== "undefined" && window.speechSynthesis) {
@@ -57,6 +61,12 @@ export default function ScoringPage() {
   useEffect(() => {
     const intervalId = setInterval(get_accuracy, 1000);
     return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    const adviceId = setTimeout(get_advice, 8000);
+    // console.log("im tryna speak");
+    return () => clearTimeout(adviceId);
   }, []);
 
   async function stop() {
@@ -78,13 +88,11 @@ export default function ScoringPage() {
         </button>
       </Link>
       <div className="flex flex-row min-h-screen items-center justify-center bg-linear-to-br from-sky-50 via-pink-50 to-purple-50 font-sans dark:bg-zinc-100">
-        <div className="flex flex-col w-full max-w-7xl mx-auto bg-red-300 p-8 rounded-lg shadow-lg mb-15 mt-20">
-          <div className="relative w-full h-200 rounded overflow-hidden bg-white">
+        <div className="flex flex-col size-full max-w-7xl mx-auto bg-red-300 p-8 rounded-lg shadow-lg mb-15 mt-20">
+          <div className="relative w-full h-130 rounded overflow-hidden bg-white">
             <img
               src="http://127.0.0.1:8000/api/video-feed"
               alt="test"
-              width={300}
-              height={300}
               className="video feed"
             />
           </div>

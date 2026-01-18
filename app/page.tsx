@@ -10,7 +10,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="text-2xl font-bold bg-linear-to-r from-pink-300 to-red-400 bg-clip-text text-transparent">
-              website name
+              FlowState
             </div>
             <ul className="flex gap-8 list-none">
               <li>
@@ -38,15 +38,15 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-20 max-w-7xl w-full">
           <div className="flex flex-col lg:w-1/2 space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-              Welcome to Our
+              Where mindful movement meets
               <span className="block bg-linear-to-r from-red-300 to-pink-400 bg-clip-text text-transparent mt-2">
-                Amazing Site
+                intelligent feedback
               </span>
             </h1>
 
             <p className="text-xl text-gray-600 leading-relaxed max-w-xl">
-              Discover something wonderful with us and embark on an
-              extraordinary journey.
+              Turn every yoga pose into insight and improve your health through
+              precise, personalized alignment.
             </p>
 
             <div className="flex gap-4 pt-4">

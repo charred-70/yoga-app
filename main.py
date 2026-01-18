@@ -14,16 +14,21 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-# client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-    "http://localhost:3000",
-    "http://127.0.0.1:3000"
-],
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+        "*"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -203,7 +208,6 @@ def get_advice():
         "Make the response formatting accessibility friendly for text to speech"
     )   
     return {"advice": response.text}
-
 
 @app.put("/api/pose-checker")
 def poseRenderer(req: PoseRequest):

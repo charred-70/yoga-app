@@ -1,4 +1,5 @@
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import Link from 'next/link';
 
 import {
     Sidebar,
@@ -45,7 +46,10 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Shrimpy Success</SidebarGroupLabel>
+                    <Link href="/">
+                        <SidebarGroupLabel>Shrimpy Success</SidebarGroupLabel>
+                    </Link>
+                    <SidebarGroupLabel>Saved Routines</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (

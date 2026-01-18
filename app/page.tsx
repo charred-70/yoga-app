@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import Image from 'next/image'
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-sky-50 font-sans dark:bg-zinc-100">
@@ -20,22 +21,29 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <div className="flex flex-row">
-        <div className="flex flex-col text-sky-500 h-64">
+      <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-16">
+        <div className="flex flex-col lg:w-1/2">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
             Welcome to Our Amazing Site
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mt-4">
             Discover something wonderful with us.
           </p>
+          <Link href="/routines">
+            <button className="px-8 py-4 bg-pink-400 text-white rounded-full font-semibold hover:bg-pink-500 transition-colors shadow-lg">
+              Get Started
+            </button>
+          </Link>
         </div>
-        <div className="text-sky-500">image stuff</div>
+        <div className="lg:w-1/2 flex justify-center lg:justify-end">
+          <Image
+            src='/test.png'
+            width={500}
+            height={500}
+            alt='test'
+          />
+        </div>
       </div>
-      <Link href="/routines">
-        <button className="px-8 py-4 bg-pink-400 text-white rounded-full font-semibold hover:bg-pink-500 transition-colors shadow-lg">
-          Get Started
-        </button>
-      </Link>
       <section className="">footer</section>
     </div>
   );

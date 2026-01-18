@@ -1,4 +1,3 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
 import Link from 'next/link';
 
 import {
@@ -15,29 +14,24 @@ import {
 // Menu items.
 const items = [
     {
-        title: "Home",
+        title: "Routine 1",
         url: "#",
-        icon: Home,
     },
     {
-        title: "Inbox",
+        title: "Routine 2",
         url: "#",
-        icon: Inbox,
     },
     {
-        title: "Calendar",
+        title: "Routine 3",
         url: "#",
-        icon: Calendar,
     },
     {
-        title: "Search",
+        title: "Routine 4",
         url: "#",
-        icon: Search,
     },
     {
-        title: "Settings",
+        title: "Routine 5",
         url: "#",
-        icon: Settings,
     },
 ]
 
@@ -47,7 +41,9 @@ export function AppSidebar() {
             <SidebarContent>
                 <SidebarGroup>
                     <Link href="/">
-                        <SidebarGroupLabel>Shrimpy Success</SidebarGroupLabel>
+                        <div className="text-2xl font-bold bg-linear-to-r from-pink-300 to-red-400 bg-clip-text text-transparent">
+                            website name
+                        </div>
                     </Link>
                     <SidebarGroupLabel>Saved Routines</SidebarGroupLabel>
                     <SidebarGroupContent>
@@ -56,7 +52,6 @@ export function AppSidebar() {
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
                                         <a href={item.url}>
-                                            <item.icon />
                                             <span>{item.title}</span>
                                         </a>
                                     </SidebarMenuButton>

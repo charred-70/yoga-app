@@ -5,11 +5,11 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-linear-to-br from-sky-50 via-pink-50 to-purple-50 font-sans">
+    <div className="flex flex-col min-h-screen bg-linear-to-br from-red-50 via-pink-50 to-purple-50 font-sans">
       <nav className="w-full bg-white/80 backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50 border-b border-pink-100">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold bg-linear-to-r from-pink-500 to-purple-400 bg-clip-text text-transparent">
+            <div className="text-2xl font-bold bg-linear-to-r from-pink-300 to-red-400 bg-clip-text text-transparent">
               website name
             </div>
             <ul className="flex gap-8 list-none">
@@ -19,6 +19,14 @@ export default function Home() {
                   className="text-gray-700 hover:text-pink-500 transition-all duration-300 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-pink-500 after:transition-all after:duration-300 hover:after:w-full"
                 >
                   Home
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  className="text-gray-700 hover:text-pink-500 transition-all duration-300 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-pink-500 after:transition-all after:duration-300 hover:after:w-full"
+                >
+                  Contact
                 </a>
               </li>
             </ul>
@@ -31,7 +39,7 @@ export default function Home() {
           <div className="flex flex-col lg:w-1/2 space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
               Welcome to Our
-              <span className="block bg-linear-to-r from-pink-400 via-purple-300 to-indigo-500 bg-clip-text text-transparent mt-2">
+              <span className="block bg-linear-to-r from-red-300 to-pink-400 bg-clip-text text-transparent mt-2">
                 Amazing Site
               </span>
             </h1>
@@ -43,7 +51,7 @@ export default function Home() {
 
             <div className="flex gap-4 pt-4">
               <Link href="/routines">
-                <button className="px-8 py-4 bg-pink-500 text-white rounded-full font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 shadow-lg">
+                <button className="px-8 py-4 bg-red-400 text-white rounded-full font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 shadow-lg">
                   Get Started
                 </button>
               </Link>

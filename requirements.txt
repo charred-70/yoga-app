@@ -23,9 +23,9 @@ distro==1.9.0
 dnspython==2.7.0
 email_validator==2.2.0
 executing==2.2.1
-fastapi==0.96.0
+fastapi
 fastapi-cli==0.0.8
-fastapi-cloud-cli==0.1.5
+fastapi-cloud-cli
 filelock==3.20.0
 Flask==3.1.1
 flatbuffers==25.12.19
@@ -34,7 +34,7 @@ frozenlist==1.7.0
 fsspec==2025.9.0
 google==3.0.0
 google-auth==2.41.1
-google-genai==1.46.0
+google-genai
 grpcio==1.76.0
 grpcio-tools==1.76.0
 h11==0.16.0
@@ -87,7 +87,7 @@ py-grpc-prometheus==0.7.0
 pyasn1==0.6.1
 pyasn1_modules==0.4.2
 pycparser==2.23
-pydantic==1.10.24
+pydantic
 pydantic_core==2.33.2
 pydub==0.25.1
 Pygments==2.19.2

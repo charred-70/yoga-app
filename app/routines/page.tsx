@@ -9,11 +9,11 @@ import { Check } from 'lucide-react';
 export default function RoutinePage() {
     const [selectedPoses, setSelectedPoses] = useState<number[]>([]);
     const poses = [
-        { id: 1, name: "Mountain Pose", image: "/test.png" },
-        { id: 2, name: "Downward Dog", image: "/test.png" },
-        { id: 3, name: "Warrior Pose", image: "/test.png" },
-        { id: 4, name: "Tree Pose", image: "/test.png" },
-        { id: 5, name: "Child's Pose", image: "/test.png" }
+        { id: 1, name: "Mountain Pose", image: "/neutral.png" },
+        { id: 2, name: "Downward Dog", image: "/neutral.png" },
+        { id: 3, name: "Warrior Pose", image: "/neutral.png" },
+        { id: 4, name: "Tree Pose", image: "/neutral.png" },
+        { id: 5, name: "Child's Pose", image: "/neutral.png" }
     ];
 
     const togglePose = (poseId: number) => {
@@ -28,7 +28,7 @@ export default function RoutinePage() {
         <>
             <div className="flex flex-col min-h-screen items-center bg-gradient-to-t from-pink-100 to-white font-sans pt-8">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-stone-700 mb-20">
-                    Select your poses !
+                    Create your Routine !
                 </h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto mb-12">
@@ -67,7 +67,7 @@ export default function RoutinePage() {
                     <div className="flex justify-center">
                         <Link href="/scoring">
                             <button
-                                className="bg-gradient-to-br from-stone-300 to-pink-400 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-full bottom-4 right-4 shadow-lg transform transition-all duration-200 hover:scale-105 flex items-center gap-2 text-lg"
+                                className="bg-pink-300 hover:bg-pink-400 text-white font-bold py-4 px-8 rounded-full bottom-4 right-4 shadow-lg transform transition-all duration-200 hover:scale-105 flex items-center gap-2 text-lg"
                             >
                                 <Check size={24} />
                                 Begin with {selectedPoses.length} {selectedPoses.length === 1 ? 'Pose' : 'Poses'} in your Routine

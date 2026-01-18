@@ -163,8 +163,8 @@ def gen_frames():
                         angleList = angle_list(lmList)
 
                     acc = check_angles(angleList)
-                    if acc != 0:
-                        print(acc)
+                    # if acc != 0:
+                        # print(acc)
                     #     print(angleList)
                     #     print('-------------------')
                 except Exception as e:

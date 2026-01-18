@@ -1,6 +1,72 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
+import sad_peter from "../public/sad_peter.jpg";
+import neutral_peter from "../public/neutral_peter.jpg";
+import happy_peter from "../public/happy_peter.jpg";
+let intervalId: string | number | NodeJS.Timeout | null | undefined;
 
 export default function Home() {
+  const [clicked, setClicked] = useState(false);
+  const [imgSrc, setShrimpy] = useState(sad_peter);
+  const [goFetch, setFetching] = useState(false);
+  async function sendPose() {
+    setClicked(true);
+    const input = document.getElementById("poses") as HTMLSelectElement;
+    if (!input) {
+      return;
+    }
+
+    const pose = input.value;
+    if (input == null) {
+      return;
+    }
+
+    await fetch("http://127.0.0.1:8000/api/pose-checker", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pose }),
+    });
+
+    await fetch(`http://127.0.0.1:8000/api/start-stream`, { method: "POST" });
+    setClicked(true);
+  }
+
+  async function stop() {
+    setClicked(false);
+    await fetch(`http://127.0.0.1:8000/api/stop-stream`, { method: "POST" });
+  }
+  async function get_accuracy() {
+    try {
+      const res = await fetch(`http://127.0.0.1:8000/api/accuracy-score`, {
+        method: "GET",
+      });
+      const data = await res.json();
+      const accuracy = data.value;
+      // const img = document.getElementById("shrimpImage") as HTMLImageElement;
+      if (accuracy == 2) {
+        setShrimpy(happy_peter);
+      } else if (accuracy == 1) {
+        setShrimpy(neutral_peter);
+      } else if (accuracy == 0) {
+        setShrimpy(sad_peter);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  function toggleInterval() {
+    if (intervalId) {
+      console.log("trying to end interval");
+      clearInterval(intervalId);
+      intervalId = null;
+    } else {
+      console.log("trying to start interval");
+      intervalId = setInterval(get_accuracy, 1000);
+    }
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
@@ -34,30 +100,44 @@ export default function Home() {
             center.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div>
+          <select name="poses" id="poses">
+            <option value="mountain">Mountain Pose</option>
+            <option value="seal">Seal Pose</option>
+            <option value="downwardDog">Downward Dog</option>
+            <option value="frog">Frog Pose</option>
+            <option value="tree">Tree Pose</option>
+          </select>
+        </div>
+        <div className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]">
+          <button
+            onClick={() => {
+              sendPose();
+              toggleInterval();
+            }}
+            id="submitBtn"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Submit
+          </button>
+        </div>
+        {clicked && (
+          <div>
+            {/* <img src="/window.svg"></img> */}
+            <img src="http://127.0.0.1:8000/api/video-feed" alt="video feed" />
+            <div className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]">
+              <button
+                onClick={() => {
+                  stop();
+                  toggleInterval();
+                }}
+              >
+                Stop
+              </button>
+            </div>
+          </div>
+        )}
+        <div>
+          <Image id="shrimpyImage" src={imgSrc} alt="shrimpy image her" />
         </div>
       </main>
     </div>

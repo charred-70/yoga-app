@@ -81,7 +81,7 @@ export default function Home() {
       </main>
 
       <footer className="w-full py-8 text-center bg-white/50 backdrop-blur-sm border-t border-pink-100">
-        <p className="text-gray-600">footer</p>
+        <p className="text-gray-600"> </p>
       </footer>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Image from "next/image";
 import shrimpy_happy from "../../public/shrimpHappy.png";
 import shrimpy_sad from "../../public/shrimpSad.png";
@@ -56,6 +56,44 @@ export default function ScoringPage() {
     }
   }
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeEnd(true);
+      stop();
+    }, 60000); // 1 minute timer
+  });
+
+  useEffect(() => {
+    const pose = async () => {
+      try {
+        const res = await fetch(`http://127.0.0.1:8000/api/curr-pose`, {
+          method: "GET",
+        });
+        const data = await res.json();
+        console.log(data);
+        var pose = data.pose;
+        if (pose == "mountain") {
+          pose = "Mountain Pose";
+        } else if (pose == "seal") {
+          pose = "Seal Pose";
+        } else if (pose == "downwardDog") {
+          pose = "Downward Dog Pose";
+        } else if (pose == "frog") {
+          pose = "Frog Pose";
+        } else if (pose == "tree") {
+          pose = "Tree Pose";
+        }
+        const poseElement = document.getElementById("current-pose");
+        if (poseElement) {
+          poseElement.textContent = pose;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    pose();
+  });
+
   // starts the interval that constantly calls get_accuracy
   // every 2 secs
   useEffect(() => {
@@ -98,6 +136,12 @@ export default function ScoringPage() {
           </div>
         </div>
         <div className="flex flex-col relative bg-white-500/10 p-7 rounded-3xl hover:shadow-pink-200 transition-shadow duration-500">
+          <h1
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-red-400 leading-tight mb-4"
+            id="current-pose"
+          >
+            Pose
+          </h1>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
             Accuracy:
           </h1>
@@ -108,9 +152,6 @@ export default function ScoringPage() {
             height={500}
             className="relative z-10"
           />
-        </div>
-        <div>
-          <button onClick={get_advice}>Get Advice</button>
         </div>
         {timeEnd && (
           <p className="text-3xl font-bold text-red-600 ml-8">Time's Up!</p>

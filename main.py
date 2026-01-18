@@ -219,6 +219,11 @@ def poseRenderer(req: PoseRequest):
 
     return {"pose": req.pose}
 
+@app.get("/api/curr-pose")
+def curr_pose():
+    global curr_pose
+    return {"pose": curr_pose}
+
 @app.get("/api/video-feed")
 def videoFeed():
     return StreamingResponse(

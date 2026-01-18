@@ -14,13 +14,13 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+# client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[ 
+    allow_origins=[
     "http://localhost:3000",
     "http://127.0.0.1:3000"
 ],
@@ -55,13 +55,13 @@ class PoseDetector():
         self.mpDraw = mp.solutions.drawing_utils
         self.mpPose = mp.solutions.pose
         self.pose = self.mpPose.Pose(self.staticImageMode, self.modelComplexity, self.smoothLandmarks, self.enableSegmentation, self.smoothSegmentation, self.minDetectionConfidence, self.minTrackingConfidence)
-    
+
     # dis method draws on video
     def findPose(self, img, draw=True):
 
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.results = self.pose.process(imgRGB)
-        
+
         if self.results.pose_landmarks:
             if draw:
                 self.mpDraw.draw_landmarks(img, self.results.pose_landmarks, self.mpPose.POSE_CONNECTIONS)
@@ -72,7 +72,7 @@ class PoseDetector():
         lmList = []
         if not self.results.pose_landmarks:
             return lmList
-    
+
         for id, lm in enumerate(self.results.pose_landmarks.landmark):
             h, w, c = img.shape
             cx, cy = int(lm.x * w), int(lm.y * h)
@@ -109,7 +109,7 @@ def angle_list(lmlist):
      angleList.append(int(left_elbow))
     #user's right hip (node 24, 12, 26)
      right_hip = calculate_angle(lmlist[12][1], lmlist[12][2], lmlist[24][1], lmlist[24][2], lmlist[26][1], lmlist[26][2])
-     angleList.append(int(right_hip))  
+     angleList.append(int(right_hip))
     #user's left hip (node 23, 11, 25)
      left_hip = calculate_angle(lmlist[11][1], lmlist[11][2], lmlist[23][1], lmlist[23][2], lmlist[25][1], lmlist[25][2])
      angleList.append(int(left_hip))
@@ -178,10 +178,10 @@ def gen_frames():
                 ret, buffer = cv2.imencode('.jpg', frame)
                 if not ret:
                     print("jpeg err")
-                    continue  
-                
+                    continue
+
                 frame = buffer.tobytes()
-                
+
                 # if len(lmList) != 0:
                 #     print(lmList)
                 yield (b'--frame\r\n'
@@ -195,12 +195,12 @@ def gen_frames():
 def index():
     return "index.html"
 
-@app.get("/api/advice")
-def get_advice():
-    response = client.models.generate_content(
-        model="gemini-3-flash-preview", contents="how do I improve my ${curr_pose} yoga pose?"
-    )   
-    return {"advice": response.text}
+# @app.get("/api/advice")
+# def get_advice():
+#     response = client.models.generate_content(
+#         model="gemini-3-flash-preview", contents="how do I improve my ${curr_pose} yoga pose?"
+#     )
+#     return {"advice": response.text}
 
 
 @app.put("/api/pose-checker")
@@ -210,7 +210,7 @@ def poseRenderer(req: PoseRequest):
     # user_message = req.message
     # print(user_message)
     # history.append({"role":"user", "content": user_message})
-    
+
     return {"pose": req.pose}
 
 @app.get("/api/video-feed")

@@ -197,8 +197,10 @@ def index():
 
 @app.get("/api/advice")
 def get_advice():
+    global curr_pose
     response = client.models.generate_content(
-        model="gemini-3-flash-preview", contents="how do I improve my ${curr_pose} yoga pose?"
+        model="gemini-2.5-flash", contents="how do I improve my " + curr_pose + " yoga pose? Keep the response to 20 words. " \
+        "Make the response formatting accessibility friendly for text to speech"
     )   
     return {"advice": response.text}
 

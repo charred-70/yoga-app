@@ -32,6 +32,25 @@ export default function ScoringPage() {
       console.error(err);
     }
   }
+
+  async function get_advice() {
+    const r = await fetch("http://127.0.0.1:8000/api/advice", {
+      method: "GET",
+    });
+    const adviceData = await r.json();
+    console.log("Advice: ", adviceData.advice);
+    speakAdvice(adviceData.advice);
+  }
+  async function speakAdvice(advice: string) {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      const utterance = new SpeechSynthesisUtterance(advice);
+      utterance.rate = 0.7;
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert("text to speech is not supported for some reason idk man..");
+    }
+  }
+
   // starts the interval that constantly calls get_accuracy
   // every 2 secs
   intervalId = setInterval(get_accuracy, 1000);
@@ -83,7 +102,9 @@ export default function ScoringPage() {
             className="relative z-10"
           />
         </div>
-
+        <div>
+          <button onClick={get_advice}>Get Advice</button>
+        </div>
         {timeEnd && (
           <p className="text-3xl font-bold text-red-600 ml-8">Time's Up!</p>
         )}

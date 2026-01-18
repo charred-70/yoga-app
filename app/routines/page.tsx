@@ -11,16 +11,16 @@ export default function RoutinePage() {
   const [selectedPoses, setSelectedPoses] = useState<number[]>([]);
 
   const poses = [
-    { id: 1, name: "Mountain Pose", image: "/neutral.png", value: "mountain" },
-    { id: 2, name: "Seal Pose", image: "/neutral.png", value: "seal" },
+    { id: 1, name: "Mountain Pose", image: "/mountain.jpg", value: "mountain" },
+    { id: 2, name: "Seal Pose", image: "/seal.jpg", value: "seal" },
     {
       id: 3,
       name: "Downward Dog",
-      image: "/neutral.png",
+      image: "/downward.jpeg",
       value: "downwardDog",
     },
-    { id: 4, name: "Frog Pose", image: "/neutral.png", value: "frog" },
-    { id: 5, name: "Tree Pose", image: "/neutral.png", value: "tree" },
+    { id: 4, name: "Frog Pose", image: "/frog.jpg", value: "frog" },
+    { id: 5, name: "Tree Pose", image: "/tree.jpg", value: "tree" },
   ];
 
   const togglePose = (poseId: number) => {
@@ -50,7 +50,7 @@ export default function RoutinePage() {
     <div className="flex flex-col min-h-screen bg-linear-to-br from-pink-50 via-purple-50 to-sky-50 font-sans">
       <div className="w-full pt-16 pb-12 px-6">
         <div className="max-w-7xl mx-auto text-center space-y-4">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-linear-to-r from-pink-500 via-purple-300 to-indigo-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-linear-to-r from-pink-400 to-red-200 bg-clip-text text-transparent">
             Create your Routine!
           </h1>
 
@@ -67,11 +67,10 @@ export default function RoutinePage() {
             <div
               key={pose.id}
               onClick={() => togglePose(pose.id)}
-              className={`group relative cursor-pointer rounded-3xl transition-all duration-300 transform hover:scale-105 ${
-                selectedPoses.includes(pose.id)
-                  ? "bg-linear-to-br from-red-300 to-pink-400 shadow-2xl shadow-pink-300"
-                  : "bg-white hover:shadow-xl shadow-md"
-              }`}
+              className={`group relative cursor-pointer rounded-3xl transition-all duration-300 transform hover:scale-105 ${selectedPoses.includes(pose.id)
+                ? "bg-linear-to-br from-red-300 to-pink-400 shadow-2xl shadow-pink-300"
+                : "bg-white hover:shadow-xl shadow-md"
+                }`}
             >
               {/* Selection Indicator */}
               {selectedPoses.includes(pose.id) && (
@@ -84,11 +83,10 @@ export default function RoutinePage() {
               <div className="p-6 space-y-4">
                 {/* Image Container */}
                 <div
-                  className={`relative aspect-square w-full rounded-2xl overflow-hidden transition-all duration-300 ${
-                    selectedPoses.includes(pose.id)
-                      ? "bg-white ring-4 ring-white/50"
-                      : "bg-gray-50 group-hover:bg-pink-50"
-                  }`}
+                  className={`relative aspect-square w-full rounded-2xl overflow-hidden transition-all duration-300 ${selectedPoses.includes(pose.id)
+                    ? "bg-white ring-4 ring-white/50"
+                    : "bg-gray-50 group-hover:bg-pink-50"
+                    }`}
                 >
                   <Image
                     src={pose.image}
@@ -100,11 +98,10 @@ export default function RoutinePage() {
 
                 {/* Pose Name */}
                 <p
-                  className={`text-xl font-semibold text-center transition-colors ${
-                    selectedPoses.includes(pose.id)
-                      ? "text-white"
-                      : "text-gray-800 group-hover:text-pink-600"
-                  }`}
+                  className={`text-xl font-semibold text-center transition-colors ${selectedPoses.includes(pose.id)
+                    ? "text-white"
+                    : "text-gray-800 group-hover:text-pink-600"
+                    }`}
                 >
                   {pose.name}
                 </p>
